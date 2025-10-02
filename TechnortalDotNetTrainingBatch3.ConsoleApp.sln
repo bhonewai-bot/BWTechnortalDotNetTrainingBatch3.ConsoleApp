@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnortalDotNetTrainingBatch3.ConsoleApp", "TechnortalDotNetTrainingBatch3.ConsoleApp\TechnortalDotNetTrainingBatch3.ConsoleApp.csproj", "{876D36DC-3BF9-4EC2-AE76-EB7E1BDE2851}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnortalDotNetTrainingBatch3.ConsoleApp2", "TechnortalDotNetTrainingBatch3.ConsoleApp2\TechnortalDotNetTrainingBatch3.ConsoleApp2.csproj", "{8DC12BF3-548D-4475-A23B-A09AD490B403}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{876D36DC-3BF9-4EC2-AE76-EB7E1BDE2851}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{876D36DC-3BF9-4EC2-AE76-EB7E1BDE2851}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{876D36DC-3BF9-4EC2-AE76-EB7E1BDE2851}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DC12BF3-548D-4475-A23B-A09AD490B403}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DC12BF3-548D-4475-A23B-A09AD490B403}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DC12BF3-548D-4475-A23B-A09AD490B403}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DC12BF3-548D-4475-A23B-A09AD490B403}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -16,4 +16,10 @@ ProductDapperService productDapperService = new ProductDapperService();
 // productDapperService.Read();
 // productDapperService.Create();
 // productDapperService.Update();
-productDapperService.Delete();
+// productDapperService.Delete();
+
+ProductEFCoreService productEfCoreService = new ProductEFCoreService();
+productEfCoreService.Read();
+// productEfCoreService.Create();
+// productEfCoreService.Update();
+// productEfCoreService.Delete();

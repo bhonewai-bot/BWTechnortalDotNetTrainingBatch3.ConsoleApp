@@ -69,7 +69,7 @@ public class SaleService
             20,
             500
         FROM Tbl_Product
-        WHERE ProductId = 2 AND Quantity > 0 AND Quantity >= 20";
+        WHERE ProductId = 2 AND DeleteFlag = 0 AND Quantity >= 20";
 
         SqlCommand cmd = new SqlCommand(insertQuery, connection);
         int result = cmd.ExecuteNonQuery();

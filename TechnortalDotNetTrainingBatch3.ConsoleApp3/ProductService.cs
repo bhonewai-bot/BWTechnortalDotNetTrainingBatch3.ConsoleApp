@@ -25,9 +25,7 @@ public class ProductService
             ProductName, 
             Quantity,
             Price,
-            DeleteFlag,
-            CreatedDateTime,
-            ModifiedDateTime
+            CreatedDateTime
         FROM Tbl_Product
         WHERE DeleteFlag = 0";
         
@@ -41,7 +39,7 @@ public class ProductService
             DataRow row = dt.Rows[i];
 
             decimal price = Convert.ToDecimal(row["Price"]);
-            Console.WriteLine($"{row["ProductId"]}. {row["ProductName"]} ({price:N0})");
+            Console.WriteLine($"{row["ProductId"]}. {row["ProductName"]} ({price:N0}). createdAt: ({row["CreatedDateTime"]})");
         }
         
         connection.Close();

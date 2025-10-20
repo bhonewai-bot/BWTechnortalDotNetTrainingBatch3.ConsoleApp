@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnortalDotNetTrainingBat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnortalDotNetTrainingBatch3.ConsoleApp3", "TechnortalDotNetTrainingBatch3.ConsoleApp3\TechnortalDotNetTrainingBatch3.ConsoleApp3.csproj", "{310E58D4-7376-4FEC-B4B7-565A7417DD79}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnortalDotNetTrainingBatch3.ConsoleApp3.Database", "TechnortalDotNetTrainingBatch3.ConsoleApp3.Database\TechnortalDotNetTrainingBatch3.ConsoleApp3.Database.csproj", "{DE2C8D30-D53B-4D77-99BC-E579EBF40F1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{310E58D4-7376-4FEC-B4B7-565A7417DD79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{310E58D4-7376-4FEC-B4B7-565A7417DD79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{310E58D4-7376-4FEC-B4B7-565A7417DD79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE2C8D30-D53B-4D77-99BC-E579EBF40F1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE2C8D30-D53B-4D77-99BC-E579EBF40F1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE2C8D30-D53B-4D77-99BC-E579EBF40F1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE2C8D30-D53B-4D77-99BC-E579EBF40F1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

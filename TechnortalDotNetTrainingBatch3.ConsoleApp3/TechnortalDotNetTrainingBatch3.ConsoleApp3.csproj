@@ -12,4 +12,8 @@
       <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.2" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\TechnortalDotNetTrainingBatch3.ConsoleApp3.Database\TechnortalDotNetTrainingBatch3.ConsoleApp3.Database.csproj" />
+    </ItemGroup>
+
 </Project>

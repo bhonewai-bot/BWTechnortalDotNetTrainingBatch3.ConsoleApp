@@ -15,6 +15,7 @@ SaleService saleService = new SaleService();
 // saleService.Read();
 // saleService.Create();
 
+
 // Dapper
 ProductDapperService productDapperService = new ProductDapperService();
 // productDapperService.Read();
@@ -25,3 +26,15 @@ ProductDapperService productDapperService = new ProductDapperService();
 SaleDapperService saleDapperService = new SaleDapperService();
 // saleDapperService.Read();
 // saleDapperService.Create();
+
+
+// EFCore
+ProductEFCoreService productEfCoreService = new ProductEFCoreService();
+// productEfCoreService.Read();
+// productEfCoreService.Create();
+// productEfCoreService.Update();
+// productEfCoreService.Delete();
+
+SaleEFCoreService saleEfCoreService = new SaleEFCoreService();
+saleEfCoreService.Read();
+// saleEfCoreService.Create();

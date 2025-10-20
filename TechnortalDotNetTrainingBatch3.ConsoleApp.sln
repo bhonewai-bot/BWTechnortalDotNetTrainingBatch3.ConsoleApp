@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnortalDotNetTrainingBat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnortalDotNetTrainingBatch3.ConsoleApp2.Database", "TechnortalDotNetTrainingBatch3.ConsoleApp2.Database\TechnortalDotNetTrainingBatch3.ConsoleApp2.Database.csproj", "{D6313304-A3F5-407A-A788-EC75A1598930}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnortalDotNetTrainingBatch3.ConsoleApp3", "TechnortalDotNetTrainingBatch3.ConsoleApp3\TechnortalDotNetTrainingBatch3.ConsoleApp3.csproj", "{310E58D4-7376-4FEC-B4B7-565A7417DD79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{D6313304-A3F5-407A-A788-EC75A1598930}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6313304-A3F5-407A-A788-EC75A1598930}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6313304-A3F5-407A-A788-EC75A1598930}.Release|Any CPU.Build.0 = Release|Any CPU
+		{310E58D4-7376-4FEC-B4B7-565A7417DD79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{310E58D4-7376-4FEC-B4B7-565A7417DD79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{310E58D4-7376-4FEC-B4B7-565A7417DD79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{310E58D4-7376-4FEC-B4B7-565A7417DD79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

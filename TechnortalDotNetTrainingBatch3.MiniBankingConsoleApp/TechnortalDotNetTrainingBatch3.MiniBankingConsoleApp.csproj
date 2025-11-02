@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\TechnortalDotNetTrainingBatch3.MiniBankingDatabase\TechnortalDotNetTrainingBatch3.MiniBankingDatabase.csproj" />
+      <ProjectReference Include="..\TechnortalDotNetTrainingBatch3.Shared\TechnortalDotNetTrainingBatch3.Shared.csproj" />
     </ItemGroup>
 
 </Project>

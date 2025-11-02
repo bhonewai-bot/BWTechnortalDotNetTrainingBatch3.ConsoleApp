@@ -1,6 +1,7 @@
 using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 using TechnortalDotNetTrainingBatch3.MiniBankingDatabase.AppDbContextModels;
+using TechnortalDotNetTrainingBatch3.Shared;
 
 namespace TechnortalDotNetTrainingBatch3.MiniBankingConsoleApp;
 
@@ -38,19 +39,11 @@ public class AccountEFCoreService
     #region CreateAccount
     public void Create()
     {
-        string accountName;
+        string accountName = ConsoleInput.GetStringInput(
+            "Enter account name: ",
+            "Account name cannot be empty!"
+            );
         string phNumber;
-
-        do
-        {
-            Console.Write("Enter account name: ");
-            accountName = Console.ReadLine() ?? "";
-
-            if (string.IsNullOrWhiteSpace(accountName))
-            {
-                Console.WriteLine("Account name cannot be empty!");
-            };
-        } while (string.IsNullOrWhiteSpace(accountName));
 
         do
         {
@@ -87,20 +80,10 @@ public class AccountEFCoreService
     #region View Account Details
     public void Edit()
     {
-        int accountId;
-        
-        while (true)
-        {
-            Console.Write("Enter account ID: ");
-            string input = Console.ReadLine() ?? "";
-            
-            if (int.TryParse(input, out accountId) && accountId > 0) break;
-
-            else
-            {
-                Console.WriteLine("Enter valid ID!");
-            }
-        }
+        int accountId = ConsoleInput.GetIntInput(
+                "Enter account ID: ",
+                "Account ID cannot be empty!"
+            );
 
         var account = _db.TblAccounts
             .AsNoTracking()
@@ -120,21 +103,9 @@ public class AccountEFCoreService
     #region Update Account
     public void Update()
     {
-        int accountId;
-        string accountName;
-
-        while (true)
-        {
-            Console.Write("Enter account ID: ");
-            string input = Console.ReadLine() ?? "";
-            
-            if (int.TryParse(input, out accountId) && accountId > 0) break;
-
-            else
-            {
-                Console.WriteLine("Enter valid ID!");
-            }
-        }
+        int accountId = ConsoleInput.GetIntInput(
+            "Enter account ID: ",
+            "Account ID cannot be empty!");
         
         var account = _db.TblAccounts
             .AsNoTracking()
@@ -146,16 +117,10 @@ public class AccountEFCoreService
             return;
         }
         
-        do
-        {
-            Console.Write("Enter account name: ");
-            accountName = Console.ReadLine() ?? "";
-
-            if (string.IsNullOrWhiteSpace(accountName))
-            {
-                Console.WriteLine("Account name cannot be empty!");
-            }
-        } while (string.IsNullOrWhiteSpace(accountName));
+        string accountName = ConsoleInput.GetStringInput(
+                "Enter account name: ",
+                "Account name cannot be empty!"
+            );
 
         account.AccountName = accountName;
 

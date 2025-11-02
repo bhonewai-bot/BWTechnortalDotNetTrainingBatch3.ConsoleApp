@@ -2,6 +2,7 @@ using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 using TechnortalDotNetTrainingBatch3.MiniBankingDatabase;
 using TechnortalDotNetTrainingBatch3.MiniBankingDatabase.AppDbContextModels;
+using TechnortalDotNetTrainingBatch3.Shared;
 
 namespace TechnortalDotNetTrainingBatch3.MiniBankingConsoleApp;
 
@@ -39,19 +40,10 @@ public class TransactionEFCoreService
     #region Deposit Money
     public void Deposit()
     {
-        string phNumber;
-        decimal amount;
-
-        do
-        {
-            Console.Write("Enter phone number: ");
-            phNumber = Console.ReadLine() ?? "";
-
-            if (string.IsNullOrWhiteSpace(phNumber))
-            {
-                Console.WriteLine("Phone number cannot be empty!");
-            }
-        } while (string.IsNullOrWhiteSpace(phNumber));
+        string phNumber = ConsoleInput.GetStringInput(
+            "Enter Phone Number: ",
+            "Phone number cannot be empty!"
+        );
 
         var account = _db.TblAccounts
             .FirstOrDefault(account => account.PhNumber == phNumber);
@@ -61,20 +53,11 @@ public class TransactionEFCoreService
             Console.WriteLine("Account not found!");
             return;
         }
-
-        while (true)
-        {
-            Console.Write("Enter amount to deposit: ");
-            string input = Console.ReadLine() ?? "";
-            
-            if (!decimal.TryParse(input, out amount) || amount <= 0 )
-            {
-                Console.WriteLine("Enter valid amount!");
-                continue;
-            };
-
-            break;
-        }
+        
+        decimal amount = ConsoleInput.GetDecimalInput(
+                "Enter amount to deposit: ",
+                "Enter valid amount!"
+            );
 
         account.Balance += amount;
 
@@ -96,19 +79,10 @@ public class TransactionEFCoreService
     #region Withdraw Money
     public void Withdraw()
     {
-        string phNumber;
-        decimal amount;
-        
-        do
-        {
-            Console.Write("Enter phone number: ");
-            phNumber = Console.ReadLine() ?? "";
-
-            if (string.IsNullOrWhiteSpace(phNumber))
-            {
-                Console.WriteLine("Phone number cannot be empty!");
-            }
-        } while (string.IsNullOrWhiteSpace(phNumber));
+        string phNumber = ConsoleInput.GetStringInput(
+                "Enter Phone Number: ",
+                "Phone number cannot be empty!"
+            );
 
         var account = _db.TblAccounts
             .FirstOrDefault(account => account.PhNumber == phNumber);
@@ -124,6 +98,8 @@ public class TransactionEFCoreService
             Console.WriteLine("Account balance is zero. Withdrawal not possible.");
             return;
         }
+        
+        decimal amount;
 
         while (true)
         {
@@ -165,19 +141,13 @@ public class TransactionEFCoreService
     #region Transfer Money
     public void Transfer()
     {
-        int accountId;
-        string phNumber;
         decimal amount;
 
-        while (true)
-        {
-            Console.Write("Enter sender ID: ");
-            string input = Console.ReadLine() ?? "";
-            
-            if (int.TryParse(input, out accountId) && accountId > 0) break;
-
-            Console.WriteLine("Enter valid ID!");
-        }
+        
+        int accountId = ConsoleInput.GetIntInput(
+            "Enter sender ID: ",
+            "Enter valid ID!"
+        );
         
         var sender = _db.TblAccounts
             .FirstOrDefault(account => account.AccountId == accountId);
@@ -194,16 +164,10 @@ public class TransactionEFCoreService
             return;
         }
         
-        do
-        {
-            Console.Write("Enter receiver phone number: ");
-            phNumber = Console.ReadLine() ?? "";
-
-            if (string.IsNullOrWhiteSpace(phNumber))
-            {
-                Console.WriteLine("Phone number cannot be empty!");
-            }
-        } while (string.IsNullOrWhiteSpace(phNumber));
+        string phNumber = ConsoleInput.GetStringInput(
+                "Enter receiver phone number: ",
+                "Phone number cannot be empty!"
+            );
         
         var receiver = _db.TblAccounts
             .FirstOrDefault(account => account.PhNumber == phNumber);

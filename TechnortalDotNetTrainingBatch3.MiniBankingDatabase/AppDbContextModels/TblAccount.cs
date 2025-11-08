@@ -7,13 +7,21 @@ public partial class TblAccount
 {
     public int AccountId { get; set; }
 
-    public string AccountName { get; set; } = null!;
+    public string MobileNo { get; set; } = null!;
 
-    public string PhNumber { get; set; } = null!;
+    public string? CustomerCode { get; set; }
+
+    public string CustomerName { get; set; } = null!;
 
     public decimal Balance { get; set; }
 
-    public DateTime CreatedAt { get; set; }
+    public string Pin { get; set; } = null!;
 
-    public virtual ICollection<TblTransaction> TblTransactions { get; set; } = new List<TblTransaction>();
+    public virtual ICollection<TblDeposit> TblDeposits { get; set; } = new List<TblDeposit>();
+
+    public virtual ICollection<TblTransactionHistory> TblTransactionHistoryFromMobileNoNavigations { get; set; } = new List<TblTransactionHistory>();
+
+    public virtual ICollection<TblTransactionHistory> TblTransactionHistoryToMobileNoNavigations { get; set; } = new List<TblTransactionHistory>();
+
+    public virtual ICollection<TblWithdrawal> TblWithdrawals { get; set; } = new List<TblWithdrawal>();
 }

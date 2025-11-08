@@ -29,9 +29,9 @@ public class AccountEFCoreService
         
         Console.WriteLine($"{"Name",-20} {"Phone",-15} {"Balance",10}");
 
-        foreach (var account in lts)
+        foreach (var item in lts)
         {
-            Console.WriteLine($"{account.AccountName, -20} {account.PhNumber, -15} {account.Balance, 10:C}");
+            Console.WriteLine($"{item.CustomerName, -20} {item.MobileNo, -15} {item.Balance, 10:C}");
         }
     }
     #endregion
@@ -39,34 +39,56 @@ public class AccountEFCoreService
     #region CreateAccount
     public void Create()
     {
-        string accountName = ConsoleInput.GetStringInput(
-            "Enter account name: ",
-            "Account name cannot be empty!"
+        string customerName = ConsoleInput.GetStringInput(
+            "Enter customer name: ",
+            "Customer name cannot be empty!"
             );
-        string phNumber;
+        
+        string mobileNo;
 
         do
         {
-            Console.Write("Enter phone number: ");
-            phNumber = Console.ReadLine() ?? "";
+            Console.Write("Enter mobile number: ");
+            mobileNo = Console.ReadLine() ?? "";
 
-            if (string.IsNullOrWhiteSpace(phNumber))
+            if (string.IsNullOrWhiteSpace(mobileNo))
             {
-                Console.WriteLine("Phone number cannot be empty!");
+                Console.WriteLine("Mobile number cannot be empty!");
                 continue;
             }
 
-            if (_db.TblAccounts.Any(account => account.PhNumber == phNumber))
+            if (_db.TblAccounts.Any(a => a.MobileNo == mobileNo))
             {
                 Console.WriteLine("Phone number already exists. Try another.");
-                phNumber = "";
+                mobileNo = "";
             }
-        } while (string.IsNullOrWhiteSpace(phNumber));
+        } while (string.IsNullOrWhiteSpace(mobileNo));
+
+        string pin;
+
+        do
+        {
+            Console.Write("Enter pin number: ");
+            pin = Console.ReadLine() ?? "";
+
+            if (string.IsNullOrWhiteSpace(pin))
+            {
+                Console.WriteLine("Pin number cannot be empty!");
+                continue;
+            }
+
+            if (pin.Length != 6 )
+            {
+                Console.WriteLine("Pin must be 6 digits!");
+                pin = "";
+            }
+        } while (string.IsNullOrWhiteSpace(pin));
 
         var account = new TblAccount()
         {
-            AccountName = accountName,
-            PhNumber = phNumber
+            CustomerName = customerName,
+            MobileNo = mobileNo,
+            Pin = pin
         };
 
         _db.Add(account);
@@ -96,7 +118,7 @@ public class AccountEFCoreService
         }
 
         Console.WriteLine($"{"Name",-20} {"Phone",-15} {"Balance",10}");
-        Console.WriteLine($"{account.AccountName, -20} {account.PhNumber, -15} {account.Balance, 10:C}");
+        Console.WriteLine($"{account.CustomerName, -20} {account.MobileNo, -15} {account.Balance, 10:C}");
     }
     #endregion
 
@@ -117,25 +139,18 @@ public class AccountEFCoreService
             return;
         }
         
-        string accountName = ConsoleInput.GetStringInput(
-                "Enter account name: ",
-                "Account name cannot be empty!"
+        string customerName = ConsoleInput.GetStringInput(
+                "Enter customer name: ",
+                "Customer name cannot be empty!"
             );
 
-        account.AccountName = accountName;
+        account.CustomerName = customerName;
 
         _db.Entry(account).State = EntityState.Modified;
         int result = _db.SaveChanges();
         
         string message = result > 0 ? "Account update successfully." : "Account update failed.";
         Console.WriteLine(message);
-    }
-    #endregion
-
-    #region Delete Account
-    public void Delete()
-    {
-        
     }
     #endregion
 }

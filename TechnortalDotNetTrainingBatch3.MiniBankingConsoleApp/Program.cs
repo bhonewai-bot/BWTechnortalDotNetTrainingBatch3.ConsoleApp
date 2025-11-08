@@ -1,9 +1,12 @@
 ﻿using TechnortalDotNetTrainingBatch3.MiniBankingConsoleApp;
 using TechnortalDotNetTrainingBatch3.MiniBankingDatabase.AppDbContextModels;
 
-using var context = new AppDbContext();
-var accountService = new AccountEFCoreService(context);
-var transactionService = new TransactionEFCoreService(context);
+using var db = new AppDbContext();
+var accountService = new AccountEFCoreService(db);
+var depositService = new DepositEFCoreService(db);
+var withdrawService = new WithdrawEFCoreService(db);
+var transferService = new TransferEFCoreService(db);
+var transactionHistoryService = new TransactionHistoryEFCoreService(db);
 bool exit = false;
 
 while (!exit)
@@ -15,12 +18,11 @@ while (!exit)
     Console.WriteLine("2. View All Accounts");
     Console.WriteLine("3. View Account Details");
     Console.WriteLine("4. Update Account");
-    Console.WriteLine("5. Delete Account");
     Console.WriteLine("\nTransactions");
-    Console.WriteLine("6. View All Transactions");
-    Console.WriteLine("7. Deposit Money");
-    Console.WriteLine("8. Withdraw Money");
-    Console.WriteLine("9. Transfer Money");
+    Console.WriteLine("5. View All Transactions");
+    Console.WriteLine("6. Deposit Money");
+    Console.WriteLine("7. Withdraw Money");
+    Console.WriteLine("8. Transfer Money");
     Console.WriteLine("0. Exit");
     Console.Write("\nEnter your choice: ");
     
@@ -32,11 +34,10 @@ while (!exit)
         case "2": accountService.Read(); return;
         case "3": accountService.Edit(); return;
         case "4": accountService.Update(); return;
-        case "5": accountService.Delete(); return;
-        case "6": transactionService.Read(); return;
-        case "7": transactionService.Deposit(); return;
-        case "8": transactionService.Withdraw(); return;
-        case "9": transactionService.Transfer(); return;
+        case "5": transactionHistoryService.Read(); return;
+        case "6": depositService.Deposit(); return;
+        case "7": withdrawService.Withdraw(); return;
+        case "8": transferService.Transfer(); return;
         case "0": 
             Console.WriteLine("Exiting...");
             return;

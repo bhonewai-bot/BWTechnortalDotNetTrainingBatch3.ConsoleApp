@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+    <div class="mb-3">
+        <label for="txtTitle" class="form-label">Title</label>
+        <input type="text" class="form-control" id="txtTitle">
+    </div>
+    <div class="mb-3">
+        <label for="txtAuthor" class="form-label">Author</label>
+        <input type="text" class="form-control" id="txtAuthor">
+    </div>
+    <div class="mb-3">
+        <label for="txtContent" class="form-label">Content</label>
+        <input type="text" class="form-control" id="txtContent">
+    </div>
+
+    <button class="btn btn-success" id="btnSave">Save</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        loadData();
+
+        function loadData() {
+            let blog = localStorage.getItem("blog");
+            if (blog == null) return;
+
+            blog = JSON.parse(blog);
+            $("#txtTitle").val(blog.Title);
+            $("#txtAuthor").val(blog.Author);
+            $("#txtContent").val(blog.Content);
+        }
+    
+        $(document).ready(function () {
+            $("#btnSave").click(function () {
+                const title = $("#txtTitle").val();
+                if (title == null || title == "") {
+                    alert("Title is required");
+                }
+                const author = $("#txtAuthor").val();
+                if (author == null || author == "") {
+                    alert("Author is required");
+                }
+                const content = $("#txtContent").val();
+                if (content == null || content == "") {
+                    alert("Content is required");
+                }
+
+                const blog = {
+                    Title: title,
+                    Author: author,
+                    Content: content
+                }
+
+                const jsonStr = JSON.stringify(blog)
+                
+                localStorage.setItem("blog", jsonStr);
+
+                $("#txtTitle").val('');
+                $("#txtAuthor").val('');
+                $("#txtContent").val('');
+            });
+        })
+    </script>
+</body>
+</html>

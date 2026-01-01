@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS CRUD System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+        .nav-tabs .nav-link.active {
+            background-color: #0d6efd;
+            color: white;
+        }
+        .summary-card {
+            border-left: 4px solid #0d6efd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="mb-4">POS CRUD System</h1>
+
+        <ul class="nav nav-tabs mb-4" id="mainTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="product-tab" data-bs-toggle="tab" data-bs-target="#product" type="button" role="tab">Product Management</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="sale-tab" data-bs-toggle="tab" data-bs-target="#sale" type="button" role="tab">Sale Management</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="mainTabContent">
+            <!-- Product Tab -->
+            <div class="tab-pane fade show active" id="product" role="tabpanel">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5>Product Form</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="txtProductCode" class="form-label">Product Code</label>
+                                    <input type="text" class="form-control" id="txtProductCode">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="txtProductName" class="form-label">Product Name</label>
+                                    <input type="text" class="form-control" id="txtProductName">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="txtProductPrice" class="form-label">Price</label>
+                                    <input type="number" step="0.01" class="form-control" id="txtProductPrice">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="txtProductStock" class="form-label">Stock Quantity</label>
+                                    <input type="number" class="form-control" id="txtProductStock">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-success" id="btnSaveProduct">Save Product</button>
+                        <button class="btn btn-secondary" id="btnCancelProduct">Cancel</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Product List</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">No.</th>
+                                        <th scope="col">Product Code</th>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Stock</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbProductData">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sale Tab -->
+            <div class="tab-pane fade" id="sale" role="tabpanel">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5>Sale Form</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="txtSaleInvoiceNo" class="form-label">Invoice No</label>
+                                    <input type="text" class="form-control" id="txtSaleInvoiceNo">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="selectSaleProduct" class="form-label">Product</label>
+                                    <select class="form-select" id="selectSaleProduct">
+                                        <option value="">Select Product</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="txtSaleQuantity" class="form-label">Quantity</label>
+                                    <input type="number" class="form-control" id="txtSaleQuantity">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="txtSaleCustomerName" class="form-label">Customer Name</label>
+                                    <input type="text" class="form-control" id="txtSaleCustomerName">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="txtSaleDate" class="form-label">Sale Date</label>
+                                    <input type="date" class="form-control" id="txtSaleDate">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Total Amount</label>
+                                    <input type="text" class="form-control" id="txtSaleTotalAmount" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-success" id="btnSaveSale">Save Sale</button>
+                        <button class="btn btn-secondary" id="btnCancelSale">Cancel</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Sale List</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">No.</th>
+                                        <th scope="col">Invoice No</th>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Total Amount</th>
+                                        <th scope="col">Customer</th>
+                                        <th scope="col">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbSaleData">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // Global variables
+        let editProductId = null;
+        let editSaleId = null;
+
+        // Initialize
+        $(document).ready(function () {
+            loadProductData();
+            loadSaleData();
+            loadProductOptions();
+
+            // Set today's date as default
+            const today = new Date().toISOString().split('T')[0];
+            $("#txtSaleDate").val(today);
+
+            // Product Save Button
+            $("#btnSaveProduct").click(function () {
+                if (editProductId == null) {
+                    saveProduct();
+                } else {
+                    updateProduct();
+                }
+
+                editProductId = null;
+                clearProductForm();
+                loadProductData();
+                loadProductOptions();
+            });
+
+            // Product Cancel Button
+            $("#btnCancelProduct").click(function () {
+                editProductId = null;
+                clearProductForm();
+            });
+
+            // Sale Save Button
+            $("#btnSaveSale").click(function () {
+                if (editSaleId == null) {
+                    saveSale();
+                } else {
+                    updateSale();
+                }
+
+                editSaleId = null;
+                clearSaleForm();
+                loadSaleData();
+                loadProductData();
+            });
+
+            // Sale Cancel Button
+            $("#btnCancelSale").click(function () {
+                editSaleId = null;
+                clearSaleForm();
+            });
+
+            // Calculate total amount when product or quantity changes
+            $("#selectSaleProduct, #txtSaleQuantity").change(function () {
+                calculateTotalAmount();
+            });
+        });
+
+        // Product Functions
+        function loadProductData() {
+            let products = getProductData();
+            
+            let trRow = "";
+            for (let i = 0; i < products.length; i++) {
+                const product = products[i];
+                
+                trRow += `
+                    <tr>
+                        <td>
+                            <button class="btn btn-warning btn-sm" onClick="editProduct('${product.Id}')">Edit</button>    
+                            <button class="btn btn-danger btn-sm" onClick="deleteProduct('${product.Id}')">Delete</button>    
+                        </td>
+                        <td>${i + 1}</td>
+                        <td>${product.ProductCode}</td>
+                        <td>${product.ProductName}</td>
+                        <td>฿${parseFloat(product.Price).toFixed(2)}</td>
+                        <td>${product.Stock}</td>
+                    </tr>
+                `;
+            }
+            $("#tbProductData").html(trRow);
+        }
+
+        function saveProduct() {
+            const productCode = $("#txtProductCode").val();
+            if (productCode == null || productCode == "") {
+                alert("Product Code is required");
+                $("#txtProductCode").focus();
+                return;
+            }
+            const productName = $("#txtProductName").val();
+            if (productName == null || productName == "") {
+                alert("Product Name is required");
+                $("#txtProductName").focus();
+                return;
+            }
+            const price = $("#txtProductPrice").val();
+            if (price == null || price == "" || parseFloat(price) <= 0) {
+                alert("Valid Price is required");
+                $("#txtProductPrice").focus();
+                return;
+            }
+            const stock = $("#txtProductStock").val();
+            if (stock == null || stock == "" || parseInt(stock) < 0) {
+                alert("Valid Stock Quantity is required");
+                $("#txtProductStock").focus();
+                return;
+            }
+
+            const uuid = crypto.randomUUID();
+            const product = {
+                Id: uuid,
+                ProductCode: productCode,
+                ProductName: productName,
+                Price: parseFloat(price),
+                Stock: parseInt(stock)
+            }
+
+            let lts = getProductData();
+            lts.push(product);
+
+            const jsonStr = JSON.stringify(lts);
+            localStorage.setItem("products", jsonStr);
+
+            alert("Product saved successfully");
+        }
+
+        function updateProduct() {
+            const productCode = $("#txtProductCode").val();
+            if (productCode == null || productCode == "") {
+                alert("Product Code is required");
+                $("#txtProductCode").focus();
+                return;
+            }
+            const productName = $("#txtProductName").val();
+            if (productName == null || productName == "") {
+                alert("Product Name is required");
+                $("#txtProductName").focus();
+                return;
+            }
+            const price = $("#txtProductPrice").val();
+            if (price == null || price == "" || parseFloat(price) <= 0) {
+                alert("Valid Price is required");
+                $("#txtProductPrice").focus();
+                return;
+            }
+            const stock = $("#txtProductStock").val();
+            if (stock == null || stock == "" || parseInt(stock) < 0) {
+                alert("Valid Stock Quantity is required");
+                $("#txtProductStock").focus();
+                return;
+            }
+
+            let lts = getProductData();
+            let index = lts.findIndex(x => x.Id == editProductId);
+
+            if (index == -1) {
+                return;
+            }
+
+            lts[index].ProductCode = productCode;
+            lts[index].ProductName = productName;
+            lts[index].Price = parseFloat(price);
+            lts[index].Stock = parseInt(stock);
+
+            const jsonStr = JSON.stringify(lts);
+            localStorage.setItem("products", jsonStr);
+
+            alert("Product updated successfully");
+        }
+
+        function editProduct(id) {
+            let lts = getProductData();
+            let result = lts.filter(x => x.Id == id);
+
+            if (result.length == 0) {
+                alert("Product not found");
+                return;
+            }
+
+            let item = result[0];
+            
+            editProductId = item.Id;
+            $("#txtProductCode").val(item.ProductCode);
+            $("#txtProductName").val(item.ProductName);
+            $("#txtProductPrice").val(item.Price);
+            $("#txtProductStock").val(item.Stock);
+        }
+
+        function deleteProduct(id) {
+            const confirmResult = confirm("Are you sure you want to delete this product?");
+
+            if (confirmResult == false) return;
+
+            let lst = getProductData();
+            lst = lst.filter(x => x.Id !== id);
+            const jsonStr = JSON.stringify(lst);
+
+            localStorage.setItem("products", jsonStr);
+
+            alert("Product deleted successfully");
+
+            loadProductData();
+            loadProductOptions();
+        }
+
+        function getProductData() {
+            let lts = [];
+            let data = localStorage.getItem("products");
+            if (data !== null) {
+                lts = JSON.parse(data);
+            }
+            return lts;
+        }
+
+        function clearProductForm() {
+            $("#txtProductCode").val('');
+            $("#txtProductName").val('');
+            $("#txtProductPrice").val('');
+            $("#txtProductStock").val('');
+            $("#txtProductCode").focus();
+        }
+
+        // Sale Functions
+        function loadSaleData() {
+            let sales = getSaleData();
+            
+            let trRow = "";
+            for (let i = 0; i < sales.length; i++) {
+                const sale = sales[i];
+                
+                trRow += `
+                    <tr>
+                        <td>
+                            <button class="btn btn-warning btn-sm" onClick="editSale('${sale.Id}')">Edit</button>    
+                            <button class="btn btn-danger btn-sm" onClick="deleteSale('${sale.Id}')">Delete</button>    
+                        </td>
+                        <td>${i + 1}</td>
+                        <td>${sale.InvoiceNo}</td>
+                        <td>${sale.ProductName}</td>
+                        <td>${sale.Quantity}</td>
+                        <td>฿${parseFloat(sale.TotalAmount).toFixed(2)}</td>
+                        <td>${sale.CustomerName}</td>
+                        <td>${sale.SaleDate}</td>
+                    </tr>
+                `;
+            }
+            $("#tbSaleData").html(trRow);
+        }
+
+        function saveSale() {
+            const invoiceNo = $("#txtSaleInvoiceNo").val();
+            if (invoiceNo == null || invoiceNo == "") {
+                alert("Invoice No is required");
+                $("#txtSaleInvoiceNo").focus();
+                return;
+            }
+            const productId = $("#selectSaleProduct").val();
+            if (productId == null || productId == "") {
+                alert("Product is required");
+                $("#selectSaleProduct").focus();
+                return;
+            }
+            const quantity = $("#txtSaleQuantity").val();
+            if (quantity == null || quantity == "" || parseInt(quantity) <= 0) {
+                alert("Valid Quantity is required");
+                $("#txtSaleQuantity").focus();
+                return;
+            }
+            const customerName = $("#txtSaleCustomerName").val();
+            if (customerName == null || customerName == "") {
+                alert("Customer Name is required");
+                $("#txtSaleCustomerName").focus();
+                return;
+            }
+            const saleDate = $("#txtSaleDate").val();
+            if (saleDate == null || saleDate == "") {
+                alert("Sale Date is required");
+                $("#txtSaleDate").focus();
+                return;
+            }
+
+            // Check stock availability
+            let products = getProductData();
+            let product = products.find(x => x.Id == productId);
+            
+            if (!product) {
+                alert("Product not found");
+                return;
+            }
+
+            if (product.Stock < parseInt(quantity)) {
+                alert("Insufficient stock. Available: " + product.Stock);
+                return;
+            }
+
+            const uuid = crypto.randomUUID();
+            const totalAmount = parseFloat(product.Price) * parseInt(quantity);
+            
+            const sale = {
+                Id: uuid,
+                InvoiceNo: invoiceNo,
+                ProductId: productId,
+                ProductName: product.ProductName,
+                Quantity: parseInt(quantity),
+                TotalAmount: totalAmount,
+                CustomerName: customerName,
+                SaleDate: saleDate
+            }
+
+            let lts = getSaleData();
+            lts.push(sale);
+
+            const jsonStr = JSON.stringify(lts);
+            localStorage.setItem("sales", jsonStr);
+
+            // Update product stock
+            let productIndex = products.findIndex(x => x.Id == productId);
+            products[productIndex].Stock -= parseInt(quantity);
+            localStorage.setItem("products", JSON.stringify(products));
+
+            alert("Sale saved successfully");
+        }
+
+        function updateSale() {
+            const invoiceNo = $("#txtSaleInvoiceNo").val();
+            if (invoiceNo == null || invoiceNo == "") {
+                alert("Invoice No is required");
+                $("#txtSaleInvoiceNo").focus();
+                return;
+            }
+            const productId = $("#selectSaleProduct").val();
+            if (productId == null || productId == "") {
+                alert("Product is required");
+                $("#selectSaleProduct").focus();
+                return;
+            }
+            const quantity = $("#txtSaleQuantity").val();
+            if (quantity == null || quantity == "" || parseInt(quantity) <= 0) {
+                alert("Valid Quantity is required");
+                $("#txtSaleQuantity").focus();
+                return;
+            }
+            const customerName = $("#txtSaleCustomerName").val();
+            if (customerName == null || customerName == "") {
+                alert("Customer Name is required");
+                $("#txtSaleCustomerName").focus();
+                return;
+            }
+            const saleDate = $("#txtSaleDate").val();
+            if (saleDate == null || saleDate == "") {
+                alert("Sale Date is required");
+                $("#txtSaleDate").focus();
+                return;
+            }
+
+            let lts = getSaleData();
+            let index = lts.findIndex(x => x.Id == editSaleId);
+
+            if (index == -1) {
+                return;
+            }
+
+            let products = getProductData();
+            let product = products.find(x => x.Id == productId);
+            
+            if (!product) {
+                alert("Product not found");
+                return;
+            }
+
+            // Restore old stock and check new stock
+            let oldSale = lts[index];
+            let oldProduct = products.find(x => x.Id == oldSale.ProductId);
+            if (oldProduct) {
+                oldProduct.Stock += oldSale.Quantity;
+            }
+
+            if (product.Stock < parseInt(quantity)) {
+                alert("Insufficient stock. Available: " + product.Stock);
+                // Restore the stock back
+                if (oldProduct) {
+                    oldProduct.Stock -= oldSale.Quantity;
+                }
+                return;
+            }
+
+            const totalAmount = parseFloat(product.Price) * parseInt(quantity);
+
+            lts[index].InvoiceNo = invoiceNo;
+            lts[index].ProductId = productId;
+            lts[index].ProductName = product.ProductName;
+            lts[index].Quantity = parseInt(quantity);
+            lts[index].TotalAmount = totalAmount;
+            lts[index].CustomerName = customerName;
+            lts[index].SaleDate = saleDate;
+
+            const jsonStr = JSON.stringify(lts);
+            localStorage.setItem("sales", jsonStr);
+
+            // Update product stock
+            let productIndex = products.findIndex(x => x.Id == productId);
+            products[productIndex].Stock -= parseInt(quantity);
+            localStorage.setItem("products", JSON.stringify(products));
+
+            alert("Sale updated successfully");
+        }
+
+        function editSale(id) {
+            let lts = getSaleData();
+            let result = lts.filter(x => x.Id == id);
+
+            if (result.length == 0) {
+                alert("Sale not found");
+                return;
+            }
+
+            let item = result[0];
+            
+            editSaleId = item.Id;
+            $("#txtSaleInvoiceNo").val(item.InvoiceNo);
+            $("#selectSaleProduct").val(item.ProductId);
+            $("#txtSaleQuantity").val(item.Quantity);
+            $("#txtSaleCustomerName").val(item.CustomerName);
+            $("#txtSaleDate").val(item.SaleDate);
+            $("#txtSaleTotalAmount").val("฿" + parseFloat(item.TotalAmount).toFixed(2));
+        }
+
+        function deleteSale(id) {
+            const confirmResult = confirm("Are you sure you want to delete this sale?");
+
+            if (confirmResult == false) return;
+
+            let lst = getSaleData();
+            let sale = lst.find(x => x.Id == id);
+            
+            if (sale) {
+                // Restore product stock
+                let products = getProductData();
+                let productIndex = products.findIndex(x => x.Id == sale.ProductId);
+                if (productIndex != -1) {
+                    products[productIndex].Stock += sale.Quantity;
+                    localStorage.setItem("products", JSON.stringify(products));
+                }
+            }
+
+            lst = lst.filter(x => x.Id !== id);
+            const jsonStr = JSON.stringify(lst);
+
+            localStorage.setItem("sales", jsonStr);
+
+            alert("Sale deleted successfully");
+
+            loadSaleData();
+            loadProductData();
+        }
+
+        function getSaleData() {
+            let lts = [];
+            let data = localStorage.getItem("sales");
+            if (data !== null) {
+                lts = JSON.parse(data);
+            }
+            return lts;
+        }
+
+        function clearSaleForm() {
+            $("#txtSaleInvoiceNo").val('');
+            $("#selectSaleProduct").val('');
+            $("#txtSaleQuantity").val('');
+            $("#txtSaleCustomerName").val('');
+            const today = new Date().toISOString().split('T')[0];
+            $("#txtSaleDate").val(today);
+            $("#txtSaleTotalAmount").val('');
+            $("#txtSaleInvoiceNo").focus();
+        }
+
+        function loadProductOptions() {
+            let products = getProductData();
+            let options = '<option value="">Select Product</option>';
+            
+            for (let i = 0; i < products.length; i++) {
+                const product = products[i];
+                options += `<option value="${product.Id}">${product.ProductName} - ฿${parseFloat(product.Price).toFixed(2)} (Stock: ${product.Stock})</option>`;
+            }
+            
+            $("#selectSaleProduct").html(options);
+        }
+
+        function calculateTotalAmount() {
+            const productId = $("#selectSaleProduct").val();
+            const quantity = $("#txtSaleQuantity").val();
+
+            if (productId && quantity && parseInt(quantity) > 0) {
+                let products = getProductData();
+                let product = products.find(x => x.Id == productId);
+                
+                if (product) {
+                    const totalAmount = parseFloat(product.Price) * parseInt(quantity);
+                    $("#txtSaleTotalAmount").val("฿" + totalAmount.toFixed(2));
+                }
+            } else {
+                $("#txtSaleTotalAmount").val('');
+            }
+        }
+    </script>
+</body>
+</html>
